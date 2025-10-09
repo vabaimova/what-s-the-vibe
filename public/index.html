@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What's the Vibe?</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>What's the vibe?</h1>
+    </header>
+
+    <main>
+        <form id="vibe-form">
+            <input type="text" id="vibe-input" placeholder="e.g., cozy autumn morning, futuristic city..." required>
+            <button type="submit">Generate Vibe</button>
+        </form>
+
+        <div id="loader" class="hidden"></div>
+        <div id="moodboard"></div>
+
+        <section id="sources-section" class="hidden">
+            <h2>Image Sources</h2>
+            <ul id="source-list"></ul>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
