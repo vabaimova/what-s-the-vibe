@@ -21,6 +21,8 @@ vibeForm.addEventListener('submit', handleFormSubmit);
 async function handleFormSubmit(event) {
     event.preventDefault(); // Prevent the form from reloading the page
     
+    // Will need to do additional input validation here
+    // the API has a character limit for the query
     const query = vibeInput.value.trim();
     if (!query) {
         alert('Please enter a vibe!');
