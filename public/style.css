@@ -1,6 +1,6 @@
 /* General Styling */
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Parisienne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     background-color: #f4f4f9;
     color: #333;
     margin: 0;
@@ -11,9 +11,21 @@ body {
 h1 {
     color: #2c3e50;
     font-size: 2.5rem;
+} 
+
+#prompt-reload { 
+      text-decoration: none;
+      cursor: pointer;
 }
 
 /* Form Styling */
+#prompt-form {
+    margin: 2rem 0;
+    display: grid;
+    place-items: center;
+    gap: 0.5rem;
+}
+
 #vibe-form {
     margin: 2rem 0;
     display: flex;
@@ -80,6 +92,7 @@ button:hover {
     text-align: left;
     max-width: 800px;
     margin-left: auto;
+    font-family: "Georgia", serif;
     margin-right: auto;
 }
 
