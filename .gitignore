@@ -1,3 +1,5 @@
 .env
 notes_to_self.md
 node_modules/
+.DS_Store
+public/.DS_Store
