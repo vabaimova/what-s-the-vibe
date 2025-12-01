@@ -36,6 +36,7 @@ async function handleFormSubmit(event) {
         const images = await fetchImages(query);
         if (images.length === 0) {
             moodboard.innerHTML = `<p>Couldn't find any images for that vibe. Try something else!</p>`;
+            document.body.classList.add('moodboard-loaded');
         } else {
             displayImages(images);
             displaySources(images);
@@ -43,6 +44,7 @@ async function handleFormSubmit(event) {
     } catch (error) {
         console.error('Error fetching images:', error);
         moodboard.innerHTML = `<p>Sorry, something went wrong while fetching images. Please try again later.</p>`;
+        document.body.classList.add('moodboard-loaded');
     } finally {
         showLoader(false);
     }
@@ -71,6 +73,7 @@ async function fetchImages(query) {
  * @param {Array} images - An array of image objects from the API.
  */
 function displayImages(images) {
+    document.body.classList.add('moodboard-loaded');
     images.forEach(image => {
         const imgElement = document.createElement('img');
         imgElement.src = image.webformatURL;
@@ -103,6 +106,7 @@ function displaySources(images) {
  */
 function clearResults() {
     moodboard.innerHTML = '';
+    document.body.classList.remove('moodboard-loaded');
     sourceList.innerHTML = '';
     sourcesSection.classList.add('hidden');
 }
