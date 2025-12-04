@@ -30,6 +30,7 @@
   --paper-bg-image: url('assets/paper.png');
   --ink-color: #5c2121;
   --button-paper-color: #fff7eb; /* A distinct, aged paper color for the button */
+  --sources-bg-image: url('assets/graphy.png');
 }
 
 
@@ -201,7 +202,7 @@ button:hover {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
     background-color: var(--button-paper-color);
-    background-image: url('assets/graphy.png');
+    background-image: var(--sources-bg-image);
     filter: url("assets/filters.svg#paper-tear");
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     z-index: -1; /* Place the paper background behind the content */
