@@ -129,9 +129,9 @@ main {
 
 button {
     padding: 0.8rem 1.5rem;
-    font-family: "Parisienne", cursive;
+    font-family: "CutiveMono", cursive;
     font-size: 1.4rem; /* Increased size for script font legibility */
-    font-weight: normal; /* Changed from bold for a softer look */
+    font-weight: bold; /* Changed from bold for a softer look */
     color: var(--paper-bg-color); /* Use paper color for text */
     background-color: var(--ink-color); /* Use ink color for background */
     border: none;
