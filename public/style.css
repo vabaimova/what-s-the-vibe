@@ -7,6 +7,30 @@
   src: url('assets/fonts/parisienne-regular.ttf') format('truetype'); /* All modern browsers */
 }
 
+/* CedarvilleCursive font */
+@font-face {
+  font-display: swap;
+  font-family: 'CedarvilleCursive';
+  font-style: normal;
+  font-weight: 400;
+  src: url('assets/fonts/CedarvilleCursive-Regular.ttf') format('truetype');
+}
+
+/* CutiveMono font */
+@font-face {
+  font-display: swap;
+  font-family: 'CutiveMono';
+  font-style: normal;
+  font-weight: 400;
+  src: url('assets/fonts/CutiveMono-Regular.ttf') format('truetype');
+}
+/* Define reusable properties for the theme */
+:root {
+  --paper-bg-color: #ffedeb;
+  --paper-bg-image: url('assets/paper.png');
+  --ink-color: #5c2121;
+}
+
 
 /* General Styling */
 header {
@@ -17,6 +41,8 @@ header {
     flex-direction: column;
     gap: 0.5rem; /* Control space between title and form */
     flex-grow: 1;
+    background-color: var(--paper-bg-color);
+    background-image: var(--paper-bg-image);
     transition: flex-grow 0.5s ease, padding 0.5s ease;
 }
 
@@ -29,16 +55,17 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-family: "Parisienne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #ffedeb; /* Fallback paper color */
-    background-image: url('assets/paper.png'); /* Local paper texture */
+    font-family: "CutiveMono", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--paper-bg-color);
+    background-image: var(--paper-bg-image);
     color: #333;
     margin: 0;
     box-sizing: border-box;
 }
 
 h1 {
-    color: #5c2121; /* Fallback color */
+    font-family: "CedarvilleCursive", cursive;
+    color: var(--ink-color); /* Fallback color */
     font-size: 4.5rem;
     margin-bottom: 0; /* Remove default bottom margin */
     /* Add a little padding to prevent clipping of characters like the question mark */
@@ -46,8 +73,8 @@ h1 {
 
     /* --- New Text Effect --- */
     /* 1. Set a background with both color and texture */
-    background-color: #5c2121; /* A dark, oxblood red for the "ink" */
-    background-image: url('assets/paper.png');
+    background-color: var(--ink-color); /* A dark, oxblood red for the "ink" */
+    background-image: var(--paper-bg-image);
 
     /* 2. Blend the color and texture. 'luminosity' preserves the texture's grain. */
     background-blend-mode: luminosity;
@@ -86,33 +113,36 @@ main {
     width: 100%;
     max-width: 550px;
     padding: 0.8rem 0.2rem; /* Reduce horizontal padding */
-    font-size: 1rem;
+    font-size: 1.2rem; /* Increased font size for a larger cursor and text */
     border: none; /* Remove default border */
-    border-bottom: 1px solid #5c2121; /* Match title ink color */
+    border-bottom: 1px solid var(--ink-color); /* Match title ink color */
     border-radius: 0; /* Remove border-radius */
     background-color: transparent; /* Make background transparent */
+    caret-color: var(--ink-color); /* Use the theme's ink color for the caret */
     transition: box-shadow 0.3s ease;
 }
 
 #vibe-input:focus {
     outline: none;
-    border-bottom-color: #5c2121; /* Match title ink color on focus */
+    border-bottom-color: var(--ink-color); /* Ensure border color remains on focus */
 }
 
 button {
     padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    font-weight: bold;
-    color: white;
-    background-color: #4CAF50;
+    font-family: "Parisienne", cursive;
+    font-size: 1.4rem; /* Increased size for script font legibility */
+    font-weight: normal; /* Changed from bold for a softer look */
+    color: var(--paper-bg-color); /* Use paper color for text */
+    background-color: var(--ink-color); /* Use ink color for background */
     border: none;
-    border-radius: 25px;
+    border-radius: 3px; /* Soften the edges slightly */
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 button:hover {
-    background-color: #45a049;
+    transform: translateY(-2px); /* Give a subtle lift on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* Moodboard Grid */
@@ -130,6 +160,8 @@ button:hover {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0; /* Start transparent */
+    animation: fadeIn 0.6s ease-out forwards; /* Apply fade-in animation */
 }
 
 #moodboard img:hover {
@@ -143,7 +175,6 @@ button:hover {
     text-align: left;
     max-width: 800px;
     margin-left: auto;
-    font-family: "Georgia", serif;
     margin-right: auto;
 }
 
@@ -157,6 +188,7 @@ button:hover {
     margin-bottom: 0.5rem;
     padding: 0.75rem;
     border-radius: 5px;
+    font-family: inherit; /* Force li to inherit 'Dash' from body */
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
@@ -177,7 +209,7 @@ button:hover {
 /* Loader Animation */
 #loader {
     border: 5px solid #f3f3f3;
-    border-top: 5px solid #4CAF50;
+    border-top: 5px solid var(--ink-color); /* Use theme's ink color */
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -188,4 +220,9 @@ button:hover {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
