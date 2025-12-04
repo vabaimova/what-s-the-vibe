@@ -150,14 +150,14 @@ button::before {
     background-color: var(--button-paper-color);
     background-image: var(--paper-bg-image);
     filter: url("assets/filters.svg#paper-tear");
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     z-index: -1; /* Place the paper background behind the text */
 }
 
 button:hover {
     /* Enhance the lift and shadow on hover for a more dynamic feel */
     transform: translateY(-3px); 
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Apply shadow to the button container on hover */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Apply shadow to the button container on hover */
 }
 
 /* Moodboard Grid */
@@ -186,11 +186,25 @@ button:hover {
 
 /* Image Sources Section */
 #sources-section {
+    position: relative; /* Required for the ::before pseudo-element */
     margin-top: 3rem;
     text-align: left;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
+    padding: 2rem; /* Add padding so content doesn't touch the torn edges */
+    z-index: 1; /* Ensure content is above the paper background */
+}
+
+#sources-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: var(--button-paper-color);
+    background-image: url('assets/graphy.png');
+    filter: url("assets/filters.svg#paper-tear");
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: -1; /* Place the paper background behind the content */
 }
 
 #sources-section h2 {
@@ -206,12 +220,11 @@ button:hover {
 }
 
 #source-list li {
-    background-color: #fff;
+    background-color: transparent; /* Remove individual li background */
     margin-bottom: 0.5rem;
-    padding: 0.75rem;
-    border-radius: 5px;
+    padding: 0.25rem 0;
     font-family: inherit; /* Force li to inherit 'Dash' from body */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: none; /* Remove individual li shadow */
 }
 
 #source-list a {
