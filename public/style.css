@@ -30,7 +30,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     font-family: "Parisienne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #fdfdfd; /* Fallback paper color */
+    background-color: #ffedeb; /* Fallback paper color */
     background-image: url('assets/paper.png'); /* Local paper texture */
     color: #333;
     margin: 0;
