@@ -61,7 +61,7 @@ h1 {
 
     /* 5. Apply the SVG filter to create a realistic, irregular ink bleed effect */
     /* The SVG filter is embedded as a Data URI for better code organization */
-    filter: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'%3e%3cfilter id='ink-bleed'%3e%3c!-- Displacement --%3e%3cfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' result='turbulence' /%3e%3cfeDisplacementMap in='SourceGraphic' in2='turbulence' scale='3' xChannelSelector='R' yChannelSelector='G' result='displaced'/%3e%3c!-- Opacity --%3e%3cfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='1' result='noise'/%3e%3cfeColorMatrix in='noise' type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.9 0.5' result='contrastNoise'/%3e%3c!-- Composite --%3e%3cfeComposite in='displaced' in2='contrastNoise' operator='in'/%3e%3c/filter%3e%3c/svg%3e#ink-bleed");
+    filter: url("assets/filters.svg#ink-bleed");
 } 
 
 main {
@@ -87,8 +87,8 @@ main {
     max-width: 550px;
     padding: 0.8rem 0.2rem; /* Reduce horizontal padding */
     font-size: 1rem;
-    border: none; /* Remove border */
-    border-bottom: 1px solid #ccc; /* Add underline effect */
+    border: none; /* Remove default border */
+    border-bottom: 1px solid #5c2121; /* Match title ink color */
     border-radius: 0; /* Remove border-radius */
     background-color: transparent; /* Make background transparent */
     transition: box-shadow 0.3s ease;
@@ -96,7 +96,7 @@ main {
 
 #vibe-input:focus {
     outline: none;
-    border-bottom-color: #4CAF50; /* Change underline color on focus */
+    border-bottom-color: #5c2121; /* Match title ink color on focus */
 }
 
 button {
