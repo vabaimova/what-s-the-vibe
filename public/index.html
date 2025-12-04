@@ -4,15 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Preconnect for better performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
-
 
     <title>What's the Vibe?</title>
     <link rel="stylesheet" href="style.css">
-
+</head>
+<body>
     <header>
         <a id="prompt-reload" href="./index.html"><h1>What's the vibe?</h1></a>
         <form id="vibe-form">
@@ -20,13 +16,9 @@
             <button type="submit">Suggest a Moodboard!</button>
         </form>
     </header>
-</head>
-<body>
     <main>
-
         <div id="loader" class="hidden"></div>
         <div id="moodboard"></div>
-
         <section id="sources-section" class="hidden">
             <h2>Image Sources</h2>
             <ul id="source-list"></ul>
