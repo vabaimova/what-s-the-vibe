@@ -7,6 +7,32 @@
   src: url('assets/fonts/parisienne-regular.ttf') format('truetype'); /* All modern browsers */
 }
 
+/* CedarvilleCursive font */
+@font-face {
+  font-display: swap;
+  font-family: 'CedarvilleCursive';
+  font-style: normal;
+  font-weight: 400;
+  src: url('assets/fonts/CedarvilleCursive-Regular.ttf') format('truetype');
+}
+
+/* CutiveMono font */
+@font-face {
+  font-display: swap;
+  font-family: 'CutiveMono';
+  font-style: normal;
+  font-weight: 400;
+  src: url('assets/fonts/CutiveMono-Regular.ttf') format('truetype');
+}
+/* Define reusable properties for the theme */
+:root {
+  --paper-bg-color: #ffedeb;
+  --paper-bg-image: url('assets/paper.png');
+  --ink-color: #5c2121;
+  --button-paper-color: #fff7eb; /* A distinct, aged paper color for the button */
+  --sources-bg-image: url('assets/graphy.png');
+}
+
 
 /* General Styling */
 header {
@@ -17,6 +43,8 @@ header {
     flex-direction: column;
     gap: 0.5rem; /* Control space between title and form */
     flex-grow: 1;
+    background-color: var(--paper-bg-color);
+    background-image: var(--paper-bg-image);
     transition: flex-grow 0.5s ease, padding 0.5s ease;
 }
 
@@ -29,16 +57,17 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-family: "Parisienne", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background-color: #fdfdfd; /* Fallback paper color */
-    background-image: url('assets/paper.png'); /* Local paper texture */
+    font-family: "CutiveMono", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--paper-bg-color);
+    background-image: var(--paper-bg-image);
     color: #333;
     margin: 0;
     box-sizing: border-box;
 }
 
 h1 {
-    color: #5c2121; /* Fallback color */
+    font-family: "CedarvilleCursive", cursive;
+    color: var(--ink-color); /* Fallback color */
     font-size: 4.5rem;
     margin-bottom: 0; /* Remove default bottom margin */
     /* Add a little padding to prevent clipping of characters like the question mark */
@@ -46,8 +75,8 @@ h1 {
 
     /* --- New Text Effect --- */
     /* 1. Set a background with both color and texture */
-    background-color: #5c2121; /* A dark, oxblood red for the "ink" */
-    background-image: url('assets/paper.png');
+    background-color: var(--ink-color); /* A dark, oxblood red for the "ink" */
+    background-image: var(--paper-bg-image);
 
     /* 2. Blend the color and texture. 'luminosity' preserves the texture's grain. */
     background-blend-mode: luminosity;
@@ -61,7 +90,7 @@ h1 {
 
     /* 5. Apply the SVG filter to create a realistic, irregular ink bleed effect */
     /* The SVG filter is embedded as a Data URI for better code organization */
-    filter: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'%3e%3cfilter id='ink-bleed'%3e%3c!-- Displacement --%3e%3cfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' result='turbulence' /%3e%3cfeDisplacementMap in='SourceGraphic' in2='turbulence' scale='3' xChannelSelector='R' yChannelSelector='G' result='displaced'/%3e%3c!-- Opacity --%3e%3cfeTurbulence type='fractalNoise' baseFrequency='0.05' numOctaves='1' result='noise'/%3e%3cfeColorMatrix in='noise' type='matrix' values='1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.9 0.5' result='contrastNoise'/%3e%3c!-- Composite --%3e%3cfeComposite in='displaced' in2='contrastNoise' operator='in'/%3e%3c/filter%3e%3c/svg%3e#ink-bleed");
+    filter: url("assets/filters.svg#ink-bleed");
 } 
 
 main {
@@ -86,33 +115,50 @@ main {
     width: 100%;
     max-width: 550px;
     padding: 0.8rem 0.2rem; /* Reduce horizontal padding */
-    font-size: 1rem;
-    border: none; /* Remove border */
-    border-bottom: 1px solid #ccc; /* Add underline effect */
+    font-size: 1.2rem; /* Increased font size for a larger cursor and text */
+    border: none; /* Remove default border */
+    border-bottom: 1px solid var(--ink-color); /* Match title ink color */
     border-radius: 0; /* Remove border-radius */
     background-color: transparent; /* Make background transparent */
+    caret-color: var(--ink-color); /* Use the theme's ink color for the caret */
     transition: box-shadow 0.3s ease;
 }
 
 #vibe-input:focus {
     outline: none;
-    border-bottom-color: #4CAF50; /* Change underline color on focus */
+    border-bottom-color: var(--ink-color); /* Ensure border color remains on focus */
 }
 
 button {
+    position: relative; /* Needed to position the ::before pseudo-element */
     padding: 0.8rem 1.5rem;
-    font-size: 1rem;
-    font-weight: bold;
-    color: white;
-    background-color: #4CAF50;
+    font-family: "CutiveMono", cursive;
+    font-size: 1.4rem; /* Increased size for script font legibility */
+    font-weight: bold; /* Make text bolder for filter visibility */
+    color: var(--ink-color); /* Use ink color for text */
+    background: none; /* Remove background from the button itself */
     border: none;
-    border-radius: 25px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    z-index: 1; /* Ensure button text is on top */
+    filter: url("assets/filters.svg#typewriter-ink"); /* Apply typewriter ink effect to the text */
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: var(--button-paper-color);
+    background-image: var(--paper-bg-image);
+    filter: url("assets/filters.svg#paper-tear");
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: -1; /* Place the paper background behind the text */
 }
 
 button:hover {
-    background-color: #45a049;
+    /* Enhance the lift and shadow on hover for a more dynamic feel */
+    transform: translateY(-3px); 
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Apply shadow to the button container on hover */
 }
 
 /* Moodboard Grid */
@@ -128,23 +174,45 @@ button:hover {
     height: 100%;
     object-fit: cover;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0; /* Start transparent */
+    animation: fadeIn 0.6s ease-out forwards; /* Apply fade-in animation */
 }
 
 #moodboard img:hover {
     transform: scale(1.03);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Image Sources Section */
 #sources-section {
+    position: relative; /* Required for the ::before pseudo-element */
     margin-top: 3rem;
     text-align: left;
     max-width: 800px;
     margin-left: auto;
-    font-family: "Georgia", serif;
     margin-right: auto;
+    padding: 2rem; /* Add padding so content doesn't touch the torn edges */
+    z-index: 1; /* Ensure content is above the paper background */
+}
+
+#sources-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: var(--button-paper-color);
+    background-image: var(--sources-bg-image);
+    filter: url("assets/filters.svg#paper-tear");
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    z-index: -1; /* Place the paper background behind the content */
+}
+
+#sources-section h2 {
+    color: var(--ink-color);
+    font-weight: bold;
+    font-size: 2rem; /* A suitable size for a sub-header */
+    filter: url("assets/filters.svg#typewriter-ink");
 }
 
 #source-list {
@@ -153,11 +221,11 @@ button:hover {
 }
 
 #source-list li {
-    background-color: #fff;
+    background-color: transparent; /* Remove individual li background */
     margin-bottom: 0.5rem;
-    padding: 0.75rem;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    padding: 0.25rem 0;
+    font-family: inherit; /* Force li to inherit 'Dash' from body */
+    box-shadow: none; /* Remove individual li shadow */
 }
 
 #source-list a {
@@ -177,7 +245,7 @@ button:hover {
 /* Loader Animation */
 #loader {
     border: 5px solid #f3f3f3;
-    border-top: 5px solid #4CAF50;
+    border-top: 5px solid var(--ink-color); /* Use theme's ink color */
     border-radius: 50%;
     width: 50px;
     height: 50px;
@@ -188,4 +256,9 @@ button:hover {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
